@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import quoteLogo from "./assets/quote.svg";
 import LinkedIn from "./assets/linkedin.svg";
 import GitHub from "./assets/github.svg";
@@ -9,16 +9,16 @@ export default function App() {
   const [spinner, setSpinner] = useState(true);
   let url = `https://goquotes-api.herokuapp.com/api/v1/random?count=1`;
 
-  const fetchQuote = async () => {
+  const fetchQuote = useCallback(async () => {
     const response = await fetch(url);
     const json = await response.json();
     setQuote(json.quotes[0]);
     setSpinner(false);
-  };
+  }, [url]);
 
   useEffect(() => {
     fetchQuote();
-  }, []);
+  }, [fetchQuote]);
 
   return (
     <div className="App">
