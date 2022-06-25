@@ -7,12 +7,12 @@ import "./styles.css";
 export default function App() {
   const [quote, setQuote] = useState({});
   const [spinner, setSpinner] = useState(true);
-  let url = `https://goquotes-api.herokuapp.com/api/v1/random?count=1`;
+  let url = `http://api.quotable.io/random`;
 
   const fetchQuote = useCallback(async () => {
     const response = await fetch(url);
     const json = await response.json();
-    setQuote(json.quotes[0]);
+    setQuote(json);
     setSpinner(false);
   }, [url]);
 
@@ -30,7 +30,7 @@ export default function App() {
           </>
         ) : (
           <>
-            <div className="quote">{quote.text}</div>
+            <div className="quote">{quote.content}</div>
             <div className="author">~{quote.author}</div>
           </>
         )}
