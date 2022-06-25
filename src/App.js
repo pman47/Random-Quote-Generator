@@ -7,7 +7,8 @@ import "./styles.css";
 export default function App() {
   const [quote, setQuote] = useState({});
   const [spinner, setSpinner] = useState(true);
-  let url = `http://api.quotable.io/random`;
+  // let url = `http://api.quotable.io/random`;
+  let url = "https://api.quotable.io/random";
 
   const fetchQuote = useCallback(async () => {
     const response = await fetch(url);
@@ -19,6 +20,8 @@ export default function App() {
   useEffect(() => {
     fetchQuote();
   }, [fetchQuote]);
+
+  // console.log(quote);
 
   return (
     <div className="App">
